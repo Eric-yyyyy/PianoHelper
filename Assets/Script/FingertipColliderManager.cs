@@ -2,88 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class FingertipColliderManager : MonoBehaviour
 {
-    public OVRSkeleton handSkeleton;  // Reference to the OVR Skeleton
-    public float colliderRadius = 0.01f;  // Adjust size of the fingertip collider
-    public string fingertipTag = "Fingertip";  // Tag to assign to fingertip colliders
+    public OVRSkeleton skeleton; // Assign this to your OVRHandPrefab
 
-    private Dictionary<OVRSkeleton.BoneId, Transform> fingertipTransforms;
+    // Size of the collider
+    public float colliderRadius = 0.01f;
+    public bool displayColliders = true;
 
     void Start()
     {
-        fingertipTransforms = new Dictionary<OVRSkeleton.BoneId, Transform>();
-
-        // Add colliders to all fingertips
-        AddFingertipColliders();
-    }
-
-    void AddFingertipColliders()
-    {
-        // List of fingertip bones based on the BoneId
-        OVRSkeleton.BoneId[] fingertipIds = {
-            OVRSkeleton.BoneId.Hand_IndexTip,
-            OVRSkeleton.BoneId.Hand_MiddleTip,
-            OVRSkeleton.BoneId.Hand_RingTip,
-            OVRSkeleton.BoneId.Hand_PinkyTip,
-            OVRSkeleton.BoneId.Hand_ThumbTip
-        };
-
-        // Loop through each bone in the skeleton
-        foreach (var bone in handSkeleton.Bones)
+        // Find each fingertip bone in the skeleton
+        foreach (var bone in skeleton.Bones)
         {
-            if (System.Array.Exists(fingertipIds, id => id == bone.Id))
+            if (IsFingertip(bone.Id))
             {
-                Transform fingertipTransform = bone.Transform;
-
-                if (fingertipTransform != null)
-                {
-                    // Create a new SphereCollider
-                    SphereCollider fingertipCollider = fingertipTransform.gameObject.AddComponent<SphereCollider>();
-                    fingertipCollider.radius = colliderRadius;
-                    fingertipCollider.isTrigger = true;
-
-                    // Tag the fingertip colliders
-                    fingertipTransform.gameObject.tag = fingertipTag;
-
-                    // Add a small visible sphere to represent the collider
-                    GameObject visualCollider = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    visualCollider.transform.SetParent(fingertipTransform);
-                    visualCollider.transform.localPosition = Vector3.zero;
-                    visualCollider.transform.localScale = new Vector3(colliderRadius * 2, colliderRadius * 2, colliderRadius * 2);
-
-                    // Make the sphere semi-transparent for debugging purposes
-                    Material transparentMaterial = new Material(Shader.Find("Transparent/Diffuse"));
-                    transparentMaterial.color = new Color(0, 1, 0, 0.5f); // Green and semi-transparent
-                    visualCollider.GetComponent<Renderer>().material = transparentMaterial;
-
-                    // Store the transform reference for later usage (if needed)
-                    fingertipTransforms[bone.Id] = fingertipTransform;
-                }
+                AddSphereCollider(bone.Transform);
             }
         }
     }
 
-    void OnDrawGizmos()
+    // Check if the bone is a fingertip
+    bool IsFingertip(OVRSkeleton.BoneId boneId)
     {
-        if (fingertipTransforms != null)
-        {
-            Gizmos.color = Color.green;
+        return boneId == OVRSkeleton.BoneId.Hand_ThumbTip ||
+               boneId == OVRSkeleton.BoneId.Hand_IndexTip ||
+               boneId == OVRSkeleton.BoneId.Hand_MiddleTip ||
+               boneId == OVRSkeleton.BoneId.Hand_RingTip ||
+               boneId == OVRSkeleton.BoneId.Hand_PinkyTip;
+    }
 
-            // Loop through each fingertip and draw the colliders in Scene view
-            foreach (var fingertip in fingertipTransforms.Values)
-            {
-                if (fingertip != null)
-                {
-                    // Visualize the SphereCollider in the Scene view
-                    Gizmos.DrawWireSphere(fingertip.position, colliderRadius);
-                }
-            }
+    // Add a sphere collider to a given fingertip transform
+    void AddSphereCollider(Transform fingertip)
+    {
+        SphereCollider collider = fingertip.gameObject.AddComponent<SphereCollider>();
+        collider.radius = colliderRadius;
+
+        // If you want to visualize the collider in the XR
+        if (displayColliders)
+        {
+            var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.transform.SetParent(fingertip);
+            sphere.transform.localPosition = Vector3.zero;
+            sphere.transform.localScale = Vector3.one * colliderRadius * 2;
+            Destroy(sphere.GetComponent<Collider>()); // Remove the extra collider
         }
     }
 }
-
-
-

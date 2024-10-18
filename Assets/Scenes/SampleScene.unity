@@ -1173,6 +1173,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1481831724651993982, guid: 4c3e8b86c7bf861488b8e697a5865072, type: 3}
+--- !u!1 &782628375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c3e8b86c7bf861488b8e697a5865072, type: 3}
+  m_PrefabInstance: {fileID: 1463717907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &816480197
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1248,7 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 1967407274}
   rightHand: {fileID: 1199393342}
-  piano: {fileID: 0}
+  piano: {fileID: 782628375}
   grabDistanceThreshold: 0.2
 --- !u!4 &894217492
 Transform:
@@ -1810,6 +1815,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114252240061623322, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1825,6 +1834,14 @@ PrefabInstance:
     - target: {fileID: 114925265787909616, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: _meshType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114925265787909616, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137619227449585070, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1878,9 +1895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e62227a6562854098cba9a3fd13a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handSkeleton: {fileID: 1199393338}
+  skeleton: {fileID: 1199393338}
   colliderRadius: 0.01
-  fingertipTag: Fingertip
+  displayColliders: 1
 --- !u!1001 &1220304833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2197,7 +2214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114252240061623322, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
@@ -2205,11 +2222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114925265787909616, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 137619227449585070, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 137619227449585070, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -3511,9 +3528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e62227a6562854098cba9a3fd13a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handSkeleton: {fileID: 1282943367}
+  skeleton: {fileID: 1282943367}
   colliderRadius: 0.01
-  fingertipTag: Fingertip
+  displayColliders: 1
 --- !u!64 &2034690251
 MeshCollider:
   m_ObjectHideFlags: 0
