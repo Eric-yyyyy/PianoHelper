@@ -118,17 +118,5 @@ public class VRARToggleController : MonoBehaviour
         // Add code to activate AR mode settings
     }
 
-    private void OnDestroy()
-    {
-        // Unsubscribe from the events to avoid memory leaks
-        toggleVR.onValueChanged.RemoveListener(OnVRToggleChanged);
-        toggleAR.onValueChanged.RemoveListener(OnARToggleChanged);
 
-        piano88.onValueChanged.RemoveListener(OnPiano88ToggleChanged);
-        piano76.onValueChanged.RemoveListener(OnPiano76ToggleChanged);
-        piano61.onValueChanged.RemoveListener(OnPiano61ToggleChanged);
-
-        MusicSheetDropping.onValueChanged.RemoveListener(OnDroppingToggleChanged);
-        MusicSheetAutoScroll.onValueChanged.RemoveListener(OnAutoScrollToggleChanged);
-    }
 }

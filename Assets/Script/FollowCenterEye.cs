@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 public class FollowCenterEye : MonoBehaviour
@@ -8,6 +10,7 @@ public class FollowCenterEye : MonoBehaviour
     public Transform centerEyeAnchor;    // Center Eye Anchor reference
     public float distance = 3.0f;        // Distance in front of the Center Eye
     public float rotationThreshold = 30f; // Rotation angle threshold
+
 
     private Quaternion lastRecordedRotation;
 
