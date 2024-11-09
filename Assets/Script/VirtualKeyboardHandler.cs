@@ -23,7 +23,7 @@ public class VirtualKeyboardHandler : MonoBehaviour
 
     private void Update()
     {
-        // Hide the keyboard when "Enter" is pressed
+
         if (virtualKeyboard.activeSelf && Input.GetKeyDown(KeyCode.Return))
         {
             HideKeyboard();
@@ -32,12 +32,12 @@ public class VirtualKeyboardHandler : MonoBehaviour
 
     private void HideKeyboard()
     {
-        virtualKeyboard.SetActive(false); // Hide the keyboard
+        virtualKeyboard.SetActive(false); 
     }
 
     private void OnDestroy()
     {
-        // Remove the listener to avoid potential memory leaks
+        
         inputFieldButton.onClick.RemoveListener(ShowKeyboard);
     }
 }

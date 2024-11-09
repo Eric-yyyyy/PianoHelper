@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class VRARToggleController : MonoBehaviour
 {
     [Header("VR and AR Toggles")]
-    public Toggle toggleVR; // Assign the VR toggle here
-    public Toggle toggleAR; // Assign the AR toggle here
+    public Toggle toggleVR; 
+    public Toggle toggleAR; 
 
     [Header("Piano Key Toggles")]
     public Toggle piano88;
@@ -20,21 +20,21 @@ public class VRARToggleController : MonoBehaviour
 
     private void Start()
     {
-        // Subscribe to the toggle events for VR and AR
+        
         toggleVR.onValueChanged.AddListener(OnVRToggleChanged);
         toggleAR.onValueChanged.AddListener(OnARToggleChanged);
 
-        // Subscribe to the toggle events for piano keys
+
         piano88.onValueChanged.AddListener(OnPiano88ToggleChanged);
         piano76.onValueChanged.AddListener(OnPiano76ToggleChanged);
         piano61.onValueChanged.AddListener(OnPiano61ToggleChanged);
 
-        // Subscribe to the toggle events for music sheets
+   
         MusicSheetDropping.onValueChanged.AddListener(OnDroppingToggleChanged);
         MusicSheetAutoScroll.onValueChanged.AddListener(OnAutoScrollToggleChanged);
 
-        // Optionally set initial state, if needed
-        toggleVR.isOn = true; // Or toggleAR.isOn = true based on the default mode
+      
+        toggleVR.isOn = true; 
         piano88.isOn = true;
         MusicSheetDropping.isOn = true;
     }
@@ -43,10 +43,9 @@ public class VRARToggleController : MonoBehaviour
     {
         if (isOn)
         {
-            // Ensure AR toggle is turned off when VR is selected
+          
             toggleAR.isOn = false;
 
-            // Execute additional logic for VR mode
             ActivateVRMode();
         }
     }
@@ -55,10 +54,9 @@ public class VRARToggleController : MonoBehaviour
     {
         if (isOn)
         {
-            // Ensure VR toggle is turned off when AR is selected
+            
             toggleVR.isOn = false;
 
-            // Execute additional logic for AR mode
             ActivateARMode();
         }
     }
@@ -109,13 +107,13 @@ public class VRARToggleController : MonoBehaviour
     private void ActivateVRMode()
     {
         Debug.Log("VR mode activated");
-        // Add code to activate VR mode settings
+
     }
 
     private void ActivateARMode()
     {
         Debug.Log("AR mode activated");
-        // Add code to activate AR mode settings
+      
     }
 
 
