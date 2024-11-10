@@ -47,7 +47,7 @@ public class PlayerSound : MonoBehaviour
             {"B1", fixedPianoParent.transform.Find("key115/B1Interactable/B1")?.gameObject },
             {"C1", fixedPianoParent.transform.Find("key115/C1Interactable/C1")?.gameObject },
             {"D1", fixedPianoParent.transform.Find("key115/D1Interactable/D1")?.gameObject },
-            {"E1", fixedPianoParent.transform.Find("key115/E0Interactable/E1")?.gameObject },
+            {"E1", fixedPianoParent.transform.Find("key115/E1Interactable/E1")?.gameObject },
             {"F1", fixedPianoParent.transform.Find("key115/F1Interactable/F1")?.gameObject },
             {"G1", fixedPianoParent.transform.Find("key115/G1Interactable/G1")?.gameObject },
 
@@ -95,7 +95,49 @@ public class PlayerSound : MonoBehaviour
             {"B7", fixedPianoParent.transform.Find("key115/B7Interactable/B7")?.gameObject },
             {"C7", fixedPianoParent.transform.Find("key115/C7Interactable/C7")?.gameObject },
 
+            {"Asharp0", fixedPianoParent.transform.Find("key115/Asharp0Interactable/Asharp0")?.gameObject },
+            {"Csharp0", fixedPianoParent.transform.Find("key115/Csharp0Interactable/Csharp0")?.gameObject },
+            {"Dsharp0", fixedPianoParent.transform.Find("key115/Dsharp0Interactable/Dsharp0")?.gameObject },
+            {"Fsharp0", fixedPianoParent.transform.Find("key115/Fsharp0Interactable/Fsharp0")?.gameObject },
+            {"Gsharp0", fixedPianoParent.transform.Find("key115/Gsharp0Interactable/Gsharp0")?.gameObject },
+            
+            {"Asharp1", fixedPianoParent.transform.Find("key115/Asharp1Interactable/Asharp1")?.gameObject },
+            {"Csharp1", fixedPianoParent.transform.Find("key115/Csharp1Interactable/Csharp1")?.gameObject },
+            {"Dsharp1", fixedPianoParent.transform.Find("key115/Dsharp1Interactable/Dsharp1")?.gameObject },
+            {"Fsharp1", fixedPianoParent.transform.Find("key115/Fsharp1Interactable/Fsharp1")?.gameObject },
+            {"Gsharp1", fixedPianoParent.transform.Find("key115/Gsharp1Interactable/Gsharp1")?.gameObject },
+            
+            {"Asharp2", fixedPianoParent.transform.Find("key115/Asharp2Interactable/Asharp2")?.gameObject },
+            {"Csharp2", fixedPianoParent.transform.Find("key115/Csharp2Interactable/Csharp2")?.gameObject },
+            {"Dsharp2", fixedPianoParent.transform.Find("key115/Dsharp2Interactable/Dsharp2")?.gameObject },
+            {"Fsharp2", fixedPianoParent.transform.Find("key115/Fsharp2Interactable/Fsharp2")?.gameObject },
+            {"Gsharp2", fixedPianoParent.transform.Find("key115/Gsharp2Interactable/Gsharp2")?.gameObject },
+            
+            {"Asharp3", fixedPianoParent.transform.Find("key115/Asharp3Interactable/Asharp3")?.gameObject },
+            {"Csharp3", fixedPianoParent.transform.Find("key115/Csharp3Interactable/Csharp3")?.gameObject },
+            {"Dsharp3", fixedPianoParent.transform.Find("key115/Dsharp3Interactable/Dsharp3")?.gameObject },
             {"Fsharp3", fixedPianoParent.transform.Find("key115/Fsharp3Interactable/Fsharp3")?.gameObject },
+            {"Gsharp3", fixedPianoParent.transform.Find("key115/Gsharp3Interactable/Gsharp3")?.gameObject },
+            
+            {"Asharp4", fixedPianoParent.transform.Find("key115/Asharp4Interactable/Asharp4")?.gameObject },
+            {"Csharp4", fixedPianoParent.transform.Find("key115/Csharp4Interactable/Csharp4")?.gameObject },
+            {"Dsharp4", fixedPianoParent.transform.Find("key115/Dsharp4Interactable/Dsharp4")?.gameObject },
+            {"Fsharp4", fixedPianoParent.transform.Find("key115/Fsharp4Interactable/Fsharp4")?.gameObject },
+            {"Gsharp4", fixedPianoParent.transform.Find("key115/Gsharp4Interactable/Gsharp4")?.gameObject },
+            
+            {"Asharp5", fixedPianoParent.transform.Find("key115/Asharp5Interactable/Asharp5")?.gameObject },
+            {"Csharp5", fixedPianoParent.transform.Find("key115/Csharp5Interactable/Csharp5")?.gameObject },
+            {"Dsharp5", fixedPianoParent.transform.Find("key115/Dsharp5Interactable/Dsharp5")?.gameObject },
+            {"Fsharp5", fixedPianoParent.transform.Find("key115/Fsharp5Interactable/Fsharp5")?.gameObject },
+            {"Gsharp5", fixedPianoParent.transform.Find("key115/Gsharp5Interactable/Gsharp5")?.gameObject },
+            
+            {"Asharp6", fixedPianoParent.transform.Find("key115/Asharp6Interactable/Asharp6")?.gameObject },
+            {"Csharp6", fixedPianoParent.transform.Find("key115/Csharp6Interactable/Csharp6")?.gameObject },
+            {"Dsharp6", fixedPianoParent.transform.Find("key115/Dsharp6Interactable/Dsharp6")?.gameObject },
+            {"Fsharp6", fixedPianoParent.transform.Find("key115/Fsharp6Interactable/Fsharp6")?.gameObject },
+            {"Gsharp6", fixedPianoParent.transform.Find("key115/Gsharp6Interactable/Gsharp6")?.gameObject },
+
+            {"Asharp7", fixedPianoParent.transform.Find("key115/Asharp7Interactable/Asharp7")?.gameObject },
 
 
 
