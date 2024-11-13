@@ -7,6 +7,7 @@ public class Notes
     private float StartBeat;
     private float EndBeat;
     private string KeyValue;
+    private bool isPoked;
 
     public Notes(float StartBeat, float EndBeat, string KeyValue)
     {

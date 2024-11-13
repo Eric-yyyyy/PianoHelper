@@ -9,6 +9,7 @@ public class SongListManager : MonoBehaviour
     public GameObject songItemTemplate;  
     public Transform content;  
     public PlayerSound playerSound;  
+    public TextMeshProUGUI  text;
 
     void Start()
     {
@@ -42,7 +43,9 @@ public class SongListManager : MonoBehaviour
     void OnSongSelected(ISong song)
     {
         if (playerSound != null)
+
         {
+            text.text = song.SongName;
             playerSound.SelectSong(song);
         }
     }

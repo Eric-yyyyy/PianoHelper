@@ -8,6 +8,8 @@ public class PlayerSound : MonoBehaviour
     public Dictionary<string, GameObject> pianoKeys;
     public Material highlightedMaterial;
     public Button finishButton;
+    public Toggle LockNote;
+    public Toggle DropNotes;
     public GameObject fixedPianoParent;
     public float speedMultiplier = 0.5f; // Adjust playback speed
 
@@ -16,6 +18,10 @@ public class PlayerSound : MonoBehaviour
     private Queue<Notes> combinedQueue;
     private Notes currentNote;
     private float songTimer = 0f;
+
+    private Dictionary<string, bool> keyPokedStatus = new Dictionary<string, bool>();
+    private Dictionary<string, float> keyPokedDuration = new Dictionary<string, float>();
+    public TwinkleManager twinkleManager;
 
     void Start()
     {
@@ -28,6 +34,13 @@ public class PlayerSound : MonoBehaviour
         else
         {
             Debug.LogError("Finish Button not assigned in the Inspector.");
+        }
+
+        // Initialize poked status and duration for each key
+        foreach (var key in pianoKeys.Keys)
+        {
+            keyPokedStatus[key] = false;
+            keyPokedDuration[key] = 0f;
         }
     }
 
@@ -138,9 +151,6 @@ public class PlayerSound : MonoBehaviour
             {"Gsharp6", fixedPianoParent.transform.Find("key115/Gsharp6Interactable/Gsharp6")?.gameObject },
 
             {"Asharp7", fixedPianoParent.transform.Find("key115/Asharp7Interactable/Asharp7")?.gameObject },
-
-
-
         };
     }
 
@@ -152,30 +162,62 @@ public class PlayerSound : MonoBehaviour
 
     public void OnFinishButtonClicked()
     {
-        if (!isPlaying && currentSong != null)
-        {
-            isPlaying = true;
-            combinedQueue = new Queue<Notes>(CombineHands());
-            songTimer = 0f;
-            PlayNextNotes();
+        if(DropNotes.isOn){
+            if (!isPlaying && currentSong != null)
+            {
+                isPlaying = true;
+                combinedQueue = new Queue<Notes>(CombineHands());
+                songTimer = 0f;
+                PlayNextNotes();
+            }
+            else
+            {
+                Debug.LogWarning("No song selected or playback is already active.");
+            }
+        }else{
+            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn)
+            {
+                
+                twinkleManager.ActivateImage1(); // Activate image1
+                twinkleManager.enabled = true;   // Ensure TwinkleManager is enabled
+            }
         }
-        else
-        {
-            Debug.LogWarning("No song selected or playback is already active.");
-        }
+
     }
 
     void Update()
     {
+        songTimer += Time.deltaTime / speedMultiplier;
+
         if (isPlaying && currentNote != null)
         {
-            songTimer += Time.deltaTime / speedMultiplier;
-
             if (songTimer >= currentNote.getStartBeat())
             {
-                PlayNoteAndHighlight(currentNote);
+                if (LockNote.isOn)
+                {
+                    if(DropNotes.isOn){
+                        if(string.Equals(currentSong.SongName,"Twinkle Twinkle Little Star")){
+
+                        }
+                    }else{
+                        if(string.Equals(currentSong.SongName,"Twinkle Twinkle Little Star")){
+
+                        }
+                    }
+                   
+                }
+                else
+                {
+                    PlayNoteAndHighlight(currentNote);
+                }
                 PlayNextNotes();
             }
+
+        }
+
+        if (LockNote.isOn)
+        {
+            CheckPokeDurations();
         }
     }
 
@@ -210,10 +252,77 @@ public class PlayerSound : MonoBehaviour
         }
     }
 
+    void HighlightKeyOnly(Notes note)
+    {
+        string keyValue = note.getKeyValue();
+
+        if (pianoKeys.ContainsKey(keyValue))
+        {
+            GameObject key = pianoKeys[keyValue];
+            MeshRenderer renderer = key.GetComponent<MeshRenderer>();
+
+            renderer.material = highlightedMaterial;
+        }
+    }
+
     IEnumerator RestoreMaterialAfterDelay(MeshRenderer renderer, Material defaultMaterial, float delay)
     {
         yield return new WaitForSeconds(delay);
         renderer.material = defaultMaterial;
+    }
+
+    void ResetAllKeyMaterials()
+    {
+        foreach (var key in pianoKeys.Values)
+        {
+            MeshRenderer renderer = key.GetComponent<MeshRenderer>();
+            renderer.material = highlightedMaterial; // Reset to default
+        }
+    }
+
+    void CheckPokeDurations()
+    {
+        foreach (var kvp in pianoKeys)
+        {
+            string key = kvp.Key;
+            GameObject keyObject = kvp.Value;
+
+            if (keyObject != null)
+            {
+                KeyIsPoked keyIsPoked = keyObject.GetComponent<KeyIsPoked>();
+
+                if (keyIsPoked != null && keyIsPoked.GetIsPoked())
+                {
+                    // Increment poke duration while the key is poked
+                    keyPokedDuration[key] += Time.deltaTime;
+
+                    // If the poked duration is greater than or equal to the required duration, reset material
+                    if (keyPokedDuration[key] >= (currentNote.getEndBeat() - currentNote.getStartBeat()) * speedMultiplier)
+                    {
+                        ResetKeyMaterial(key);
+                        keyPokedStatus[key] = false;
+                        keyPokedDuration[key] = 0f; // Reset poke duration for next interaction
+                    }
+                }
+                else
+                {
+                    // Reset poke duration if key is not being poked
+                    keyPokedDuration[key] = 0f;
+                }
+            }
+        }
+    }
+
+    void ResetKeyMaterial(string key)
+    {
+        if (pianoKeys.ContainsKey(key))
+        {
+            GameObject keyObject = pianoKeys[key];
+            MeshRenderer renderer = keyObject.GetComponent<MeshRenderer>();
+
+            // Reset to the default material
+            renderer.material = highlightedMaterial; // Assuming highlightedMaterial is the default
+        }
     }
 
     List<Notes> CombineHands()

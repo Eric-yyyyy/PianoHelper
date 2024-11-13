@@ -7,7 +7,7 @@ public class CastleCity : ISong
 {
     private List<Notes> leftHand;
     private List<Notes> rightHand;
-    public string SongName =>  "Castle in the Sky";
+    public string SongName =>  "Laputua: Castle in the Sky";
     
     public CastleCity()
     {
