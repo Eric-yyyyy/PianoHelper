@@ -437,7 +437,7 @@ public class CastleCity : ISong
         leftHand.Add(new Notes(113.0f, 116.0f, "B2"));
         leftHand.Add(new Notes(117.0f, 120.0f, "Fsharp2"));
         leftHand.Add(new Notes(121.0f, 124.0f, "B3"));
-        leftHand.Add(new Notes(125.0f, 128.0f, "F2"));
+        leftHand.Add(new Notes(125.0f, 128.0f, "Fsharp2"));
 
         leftHand.Add(new Notes(129.0f, 130.0f, "E1"));
         leftHand.Add(new Notes(131.0f, 132.0f, "B2"));
@@ -488,7 +488,7 @@ public class CastleCity : ISong
         leftHand.Add(new Notes(229.0f, 230.0f, "A3"));
         leftHand.Add(new Notes(231.0f, 232.0f, "C3"));
         leftHand.Add(new Notes(234.0f, 236.0f, "E3"));
-        leftHand.Add(new Notes(237.0f, 240.0f, "A3"));
+        leftHand.Add(new Notes(237.0f, 240.0f, "C3"));
 
         leftHand.Add(new Notes(241.0f, 242.0f, "F2"));
         leftHand.Add(new Notes(243.0f, 244.0f, "A3"));
@@ -547,6 +547,8 @@ public class CastleCity : ISong
         leftHand.Add(new Notes(347.0f, 348.0f, "B2"));
         leftHand.Add(new Notes(349.0f, 350.0f, "D3"));
         leftHand.Add(new Notes(351.0f, 352.0f, "G2"));
+
+        //second Page
 
 
 

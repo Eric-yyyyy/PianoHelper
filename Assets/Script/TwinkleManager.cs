@@ -6,6 +6,7 @@ using TMPro;
 
 public class TwinkleManager : MonoBehaviour
 {
+    public Toggle LockNote;
     public KeyPokeTracker keyPokeTracker;
     public RawImage image1; 
     public RawImage image2; 
@@ -29,8 +30,53 @@ public class TwinkleManager : MonoBehaviour
     private readonly List<string> targetleftSequence2 = new List<string> { "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "B2"}; 
     private readonly List<string> targetSequence3 = new List<string>{ "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
     private readonly List<string> targetleftSequence3 = new List<string>{"E2","E2","E2","E2","F2","G2","A3","B3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
-    private readonly List<string> righthand = new List<string>{"C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3","G3", "G3", "F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3",  "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
-    private readonly List<string> lefthand = new List<string>{"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2", "B2", "B2", "C2" ,"E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2","E2","E2","E2","F2","G2","A3","B3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+
+    public List<string> righthand = new List<string>{"C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3","G3", "G3","F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3", "C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3" };
+    private readonly List<string>  lefthand =     new List<string>{"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2", "B2", "B2", "C2","E2", "E2","D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2","E2","E2","E2","F2","G2","A3","B3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+    private readonly List<List<string>> combinedHand = new List<List<string>> {
+    new List<string> { "C3", "E2" },
+    new List<string> { "C3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "A4", "F2" },
+    new List<string> { "A4", "F2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "D3", "B2" },
+    new List<string> { "D3", "B2" },
+    new List<string> { "C3", "C2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "D3", "B2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "D3", "B2" },
+    new List<string> { "C3", "E2" },
+    new List<string> { "C3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "G3", "E2" },
+    new List<string> { "A4", "F2", "G2" },
+    new List<string> { "A4", "A3", "B3" },
+    new List<string> { "G3", "C3" },
+    new List<string> { "F3", "D2" },
+    new List<string> { "F3", "A3" },
+    new List<string> { "E3", "G2" },
+    new List<string> { "E3", "C2" },
+    new List<string> { "D3", "G2" },
+    new List<string> { "D3", "A2" },
+    new List<string> { "C3", "C2" }
+};
     private bool isFirstSequenceCompleted = false;
     private bool isSecondSequenceCompleted = false;
     private bool isThirdSequenceCompleted = false;
@@ -43,7 +89,7 @@ public class TwinkleManager : MonoBehaviour
         keyPokeTracker.ClearKeyPokeOrder();
         errorKeys = 0;
         durationTime = 0f;
-        
+        this.enabled = false;
         if (keyPokeTracker == null)
         {
             Debug.LogError("KeyPokeTracker not assigned in TwinkleManager.");
@@ -55,44 +101,54 @@ public class TwinkleManager : MonoBehaviour
 
        
     }
+    public void FinishButton()
+    {
+        this.enabled = true; 
+    }
 
     private void Update()
     {
+        if (!enabled) return; 
         if (keyPokeTracker == null) return;
 
         pokeOrder = keyPokeTracker.GetKeyPokeOrder();
-        
-        ChangeMaterial();
-        if (!isFirstSequenceCompleted && CheckSequenceList.Count >= targetSequence1.Count &&
-            (CheckAndCalculateSequence(CheckSequenceList, targetSequence1) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence1)))
-        {
-            image1.gameObject.SetActive(false);
-            image2.gameObject.SetActive(true);
-            isFirstSequenceCompleted = true;
-            //ChangeMaterial();
-            CheckSequenceList.Clear();
+        if(LockNote.isOn){
+            ChangeMaterial();
+            if (!isFirstSequenceCompleted && CheckSequenceList.Count >= targetSequence1.Count &&
+                (CheckAndCalculateSequence(CheckSequenceList, targetSequence1) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence1)))
+            {
+                image1.gameObject.SetActive(false);
+                image2.gameObject.SetActive(true);
+                isFirstSequenceCompleted = true;
+                //ChangeMaterial();
+                CheckSequenceList.Clear();
+            }
+            else if (isFirstSequenceCompleted && !isSecondSequenceCompleted && CheckSequenceList.Count >= targetSequence2.Count &&
+                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence2) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence2)))
+            {
+                image2.gameObject.SetActive(false);
+                image3.gameObject.SetActive(true);
+                isSecondSequenceCompleted = true;
+                //ChangeMaterial();
+                CheckSequenceList.Clear();
+            }
+            else if (isSecondSequenceCompleted && !isThirdSequenceCompleted && CheckSequenceList.Count >= targetSequence3.Count &&
+                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence3) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence3)))
+            {
+                image3.gameObject.SetActive(false);
+                isThirdSequenceCompleted = true;
+                //ChangeMaterial();
+                CheckSequenceList.Clear();
+            }
+            else if (isThirdSequenceCompleted)
+            {
+                DisplayReport();
+                this.enabled = false;
+            }
+        }else{
+
         }
-        else if (isFirstSequenceCompleted && !isSecondSequenceCompleted && CheckSequenceList.Count >= targetSequence2.Count &&
-                 (CheckAndCalculateSequence(CheckSequenceList, targetSequence2) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence2)))
-        {
-            image2.gameObject.SetActive(false);
-            image3.gameObject.SetActive(true);
-            isSecondSequenceCompleted = true;
-            //ChangeMaterial();
-            CheckSequenceList.Clear();
-        }
-        else if (isSecondSequenceCompleted && !isThirdSequenceCompleted && CheckSequenceList.Count >= targetSequence3.Count &&
-                 (CheckAndCalculateSequence(CheckSequenceList, targetSequence3) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence3)))
-        {
-            image3.gameObject.SetActive(false);
-            isThirdSequenceCompleted = true;
-            //ChangeMaterial();
-            CheckSequenceList.Clear();
-        }
-        else if (isThirdSequenceCompleted)
-        {
-            DisplayReport();
-        }
+
     }
 
     private bool CheckAndCalculateSequence(List<KeyPokeTracker.KeyPokeInfo> pokeOrder, List<string> targetSequence)
@@ -121,13 +177,14 @@ public class TwinkleManager : MonoBehaviour
         return false;
     }
 
-    private void DisplayReport()
+    public void DisplayReport()
     {
         report.SetActive(true);
         SongName.text = "Twinkle Twinkle Little Star";
         UsedTime.text = durationTime.ToString("F2") + " seconds";
         errorKeys = (totalPokeOrder.Count >= 86)? totalPokeOrder.Count - 86 : 86 - totalPokeOrder.Count;
         AccuracyRate.text = ((86 - errorKeys) / 86f * 100).ToString("F2") + "%";
+        this.enabled = false;
     }
 
     public void ActivateImage1()

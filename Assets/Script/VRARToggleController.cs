@@ -18,6 +18,9 @@ public class VRARToggleController : MonoBehaviour
     public Toggle MusicSheetDropping;
     public Toggle MusicSheetAutoScroll;
 
+    public OVRPassthroughLayer passthroughLayer;
+    public GameObject plane;
+
     private void Start()
     {
         
@@ -37,6 +40,8 @@ public class VRARToggleController : MonoBehaviour
         toggleVR.isOn = true; 
         piano88.isOn = true;
         MusicSheetDropping.isOn = true;
+        passthroughLayer.enabled = false; 
+        plane.SetActive(true);
     }
 
     private void OnVRToggleChanged(bool isOn)
@@ -107,13 +112,15 @@ public class VRARToggleController : MonoBehaviour
     private void ActivateVRMode()
     {
         Debug.Log("VR mode activated");
-
+        passthroughLayer.enabled = false;
+        plane.SetActive(true);
     }
 
     private void ActivateARMode()
     {
         Debug.Log("AR mode activated");
-      
+        passthroughLayer.enabled = true;
+        plane.SetActive(false);
     }
 
 

@@ -178,8 +178,16 @@ public class PlayerSound : MonoBehaviour
         }else{
             if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn)
             {
+
                 twinkleManager.ActivateImage1(); 
                 twinkleManager.enabled = true;  
+            }if (currentSong.SongName == "Twinkle Twinkle Little Star" && !LockNote.isOn && !DropNotes.isOn){
+                isPlaying = true;
+                combinedQueue = new Queue<Notes>(CombineHands());
+                songTimer = 0f;
+                PlayNextNotes();
+                twinkleManager.ActivateImage1(); 
+                twinkleManager.enabled = true; 
             }
         }
 
@@ -247,7 +255,18 @@ public class PlayerSound : MonoBehaviour
             keyAudio.Play();
             Material defaultMaterial = renderer.material;
             renderer.material = highlightedMaterial;
-
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f){
+                twinkleManager.image1.gameObject.SetActive(false);
+                twinkleManager.image2.gameObject.SetActive(true);
+            }
+            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f){
+                twinkleManager.image2.gameObject.SetActive(false);
+                twinkleManager.image3.gameObject.SetActive(true);
+            }
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f){
+                twinkleManager.image3.gameObject.SetActive(false);
+                twinkleManager.DisplayReport();
+            }
             StartCoroutine(RestoreMaterialAfterDelay(renderer, defaultMaterial, (note.getEndBeat() - note.getStartBeat()) * speedMultiplier));
         }
     }
