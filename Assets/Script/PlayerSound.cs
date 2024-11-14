@@ -11,9 +11,9 @@ public class PlayerSound : MonoBehaviour
     public Toggle LockNote;
     public Toggle DropNotes;
     public GameObject fixedPianoParent;
-    public float speedMultiplier = 0.5f; // Adjust playback speed
+    public float speedMultiplier = 0.5f;
 
-    private ISong currentSong; // Current song selected for playback
+    private ISong currentSong; 
     private bool isPlaying = false;
     private Queue<Notes> combinedQueue;
     private Notes currentNote;
@@ -26,6 +26,7 @@ public class PlayerSound : MonoBehaviour
     void Start()
     {
         InitializePianoKeys();
+        twinkleManager.pianoKeys = pianoKeys;
 
         if (finishButton != null)
         {
@@ -36,7 +37,7 @@ public class PlayerSound : MonoBehaviour
             Debug.LogError("Finish Button not assigned in the Inspector.");
         }
 
-        // Initialize poked status and duration for each key
+ 
         foreach (var key in pianoKeys.Keys)
         {
             keyPokedStatus[key] = false;
@@ -177,9 +178,8 @@ public class PlayerSound : MonoBehaviour
         }else{
             if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn)
             {
-                
-                twinkleManager.ActivateImage1(); // Activate image1
-                twinkleManager.enabled = true;   // Ensure TwinkleManager is enabled
+                twinkleManager.ActivateImage1(); 
+                twinkleManager.enabled = true;  
             }
         }
 
@@ -293,20 +293,20 @@ public class PlayerSound : MonoBehaviour
 
                 if (keyIsPoked != null && keyIsPoked.GetIsPoked())
                 {
-                    // Increment poke duration while the key is poked
+                   
                     keyPokedDuration[key] += Time.deltaTime;
 
-                    // If the poked duration is greater than or equal to the required duration, reset material
+                   
                     if (keyPokedDuration[key] >= (currentNote.getEndBeat() - currentNote.getStartBeat()) * speedMultiplier)
                     {
                         ResetKeyMaterial(key);
                         keyPokedStatus[key] = false;
-                        keyPokedDuration[key] = 0f; // Reset poke duration for next interaction
+                        keyPokedDuration[key] = 0f; 
                     }
                 }
                 else
                 {
-                    // Reset poke duration if key is not being poked
+                
                     keyPokedDuration[key] = 0f;
                 }
             }
@@ -320,8 +320,8 @@ public class PlayerSound : MonoBehaviour
             GameObject keyObject = pianoKeys[key];
             MeshRenderer renderer = keyObject.GetComponent<MeshRenderer>();
 
-            // Reset to the default material
-            renderer.material = highlightedMaterial; // Assuming highlightedMaterial is the default
+            
+            renderer.material = highlightedMaterial; 
         }
     }
 

@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class KeyIsPoked : MonoBehaviour
 {
     private bool isPoked;
     private float pokeStartTime;
     private float pokeDuration;
-    //public TextMeshProUGUI  text;
+    private bool isChanged;
 
-
-    // Reference to the KeyPokeTracker
     public KeyPokeTracker keyPokeTracker;
 
     void Start()
     {
         isPoked = false;
+        isChanged = false;
         pokeStartTime = 0f;
         pokeDuration = 0f;
 
-        // Find the KeyPokeTracker in the scene if not assigned
         if (keyPokeTracker == null)
         {
             keyPokeTracker = FindObjectOfType<KeyPokeTracker>();
@@ -37,9 +33,15 @@ public class KeyIsPoked : MonoBehaviour
         if (!isPoked)
         {
             pokeStartTime = Time.time;
-            //text.text = gameObject.name;
         }
         isPoked = true;
+
+        // Update the KeyPokeTracker entry
+        if (keyPokeTracker != null)
+        {
+            isChanged = true;
+            //keyPokeTracker.AddOrUpdateKeyPoke(gameObject.name, pokeStartTime, pokeDuration, isPoked, isChanged);
+        }
     }
 
     public void SetIsPokedToFalse()
@@ -49,10 +51,11 @@ public class KeyIsPoked : MonoBehaviour
             pokeDuration = Time.time - pokeStartTime;
             Debug.Log("Poke Duration: " + pokeDuration + " seconds");
 
-            // Add this poke data to the KeyPokeTracker
+            // Update the KeyPokeTracker entry
             if (keyPokeTracker != null)
             {
-                keyPokeTracker.AddKeyPoke(gameObject.name, pokeStartTime, pokeDuration);
+                isChanged = true;
+                keyPokeTracker.AddOrUpdateKeyPoke(gameObject.name, pokeStartTime, pokeDuration, false, isChanged);
             }
         }
         isPoked = false;
