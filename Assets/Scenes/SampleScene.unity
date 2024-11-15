@@ -10212,6 +10212,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3197448813828850217}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -10230,6 +10242,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3197448813828850215}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3197448813828850217}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToFalse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16719,6 +16743,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5394115253177927598}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -16737,6 +16773,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5394115253177927596}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5394115253177927598}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToFalse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24182,6 +24230,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8915176655623432498}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -24200,6 +24260,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8915176655623432496}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8915176655623432498}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToFalse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29601,6 +29673,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6717115480628085284}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -29619,6 +29703,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6717115480628085282}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6717115480628085284}
+        m_TargetAssemblyTypeName: KeyIsPoked, Assembly-CSharp
+        m_MethodName: SetIsPokedToFalse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -43399,6 +43495,7 @@ MonoBehaviour:
   SongName: {fileID: 788664349}
   UsedTime: {fileID: 921640372}
   AccuracyRate: {fileID: 181050956}
+  Testing: {fileID: 2099261682}
   righthand:
   - C3
   - C3
@@ -44986,6 +45083,7 @@ GameObject:
   - component: {fileID: 932070497899962133}
   - component: {fileID: 6717115480628085283}
   - component: {fileID: 6717115480628085282}
+  - component: {fileID: 6717115480628085284}
   m_Layer: 0
   m_Name: B2
   m_TagString: Untagged
@@ -50363,7 +50461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a52372c7a04d74896d387e7dd90393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPokeTracker: {fileID: 0}
+  keyPokeTracker: {fileID: 1076186827}
 --- !u!1 &3200295078991548125
 GameObject:
   m_ObjectHideFlags: 0
@@ -55907,7 +56005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a52372c7a04d74896d387e7dd90393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPokeTracker: {fileID: 0}
+  keyPokeTracker: {fileID: 1076186827}
 --- !u!1 &5401139788109303184
 GameObject:
   m_ObjectHideFlags: 0
@@ -59304,6 +59402,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pokeInteractable: {fileID: 1348962338}
   _buttonBaseTransform: {fileID: 917641868}
+--- !u!114 &6717115480628085284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322047630621959927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a52372c7a04d74896d387e7dd90393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPokeTracker: {fileID: 1076186827}
 --- !u!23 &6724166786169129316
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -69017,7 +69128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a52372c7a04d74896d387e7dd90393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPokeTracker: {fileID: 0}
+  keyPokeTracker: {fileID: 1076186827}
 --- !u!23 &8981651438553739986
 MeshRenderer:
   m_ObjectHideFlags: 0

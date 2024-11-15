@@ -17,6 +17,7 @@ public class TwinkleManager : MonoBehaviour
     public TextMeshProUGUI SongName;
     public TextMeshProUGUI UsedTime;
     public TextMeshProUGUI AccuracyRate;
+    public TextMeshProUGUI Testing;
     private int currentHighlightIndex = 0;
     private bool keyPokedAndReset = true;
     private float delayBetweenNotes = 0.5f; 
@@ -27,12 +28,14 @@ public class TwinkleManager : MonoBehaviour
     private readonly List<string> targetSequence1 = new List<string> { "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
     private readonly List<string> targetleftSequence1 = new List<string> {"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2", "B2", "B2", "C2" };
     private readonly List<string> targetSequence2 = new List<string> { "G3", "G3", "F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3"};
-    private readonly List<string> targetleftSequence2 = new List<string> { "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "B2"}; 
+    private readonly List<string> targetleftSequence2 = new List<string> { "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "A2"}; 
     private readonly List<string> targetSequence3 = new List<string>{ "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
-    private readonly List<string> targetleftSequence3 = new List<string>{"E2","E2","E2","E2","F2","G2","A3","B3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+    private readonly List<string> targetleftSequence3 = new List<string>{"E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
 
     public List<string> righthand = new List<string>{"C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3","G3", "G3","F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3", "C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3" };
-    private readonly List<string>  lefthand =     new List<string>{"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2", "B2", "B2", "C2","E2", "E2","D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2","E2","E2","E2","F2","G2","A3","B3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+    private readonly List<string>  lefthand = new List<string>{"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2",
+     "B2", "B2", "C2", "E2", "E2","D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", 
+     "C2", "A2", "E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
     private readonly List<List<string>> combinedHand = new List<List<string>> {
     new List<string> { "C3", "E2" },
     new List<string> { "C3", "E2" },
@@ -200,31 +203,43 @@ public class TwinkleManager : MonoBehaviour
         currentHighlightIndex = 0;
     }
 public void ChangeMaterial()
+
 {
+    
     if (currentHighlightIndex >= righthand.Count) return; // Stop if all notes are highlighted
 
     GameObject key = pianoKeys[righthand[currentHighlightIndex]];
     MeshRenderer renderer = key.GetComponent<MeshRenderer>();
+    GameObject key2 = pianoKeys[lefthand[currentHighlightIndex]];
+    MeshRenderer renderer2 = key2.GetComponent<MeshRenderer>();
 
     // Only highlight if the current key has been reset
     if (keyPokedAndReset)
     {
         renderer.material = highlightedMaterial;
+        renderer2.material = highlightedMaterial;
         keyPokedAndReset = false; // Mark as highlighted
     }
 
     // Check if the current key has been poked
-    if (pokeOrder.Count > 0 && string.Equals(pokeOrder[pokeOrder.Count - 1].keyName, righthand[currentHighlightIndex]))
+    if (pokeOrder.Count > 0 && (string.Equals(pokeOrder[pokeOrder.Count - 1].keyName, righthand[currentHighlightIndex]) || string.Equals(pokeOrder[pokeOrder.Count -1 ].keyName, lefthand[currentHighlightIndex])))
     {
-        ResetMaterial(righthand[currentHighlightIndex]); // Reset the material to default
+        this.enabled = false;
+        ResetMaterial(righthand[currentHighlightIndex]); 
+        
+        ResetMaterial(lefthand[currentHighlightIndex]);
         keyPokedAndReset = true; // Mark as ready for the next note
         currentHighlightIndex++; // Move to the next note
-        if (!CheckSequenceList.Contains(pokeOrder[pokeOrder.Count - 1]))
+        foreach (var ele in pokeOrder)
+        {
+            if (!CheckSequenceList.Contains(ele))
             {
-                CheckSequenceList.Add(pokeOrder[pokeOrder.Count - 1]);
-               
+                CheckSequenceList.Add(ele);
+                Testing.text = string.Join("\n", CheckSequenceList);
             }
+        }
         keyPokeTracker.ClearKeyPokeOrder(); // Clear the poke order to track the next note separately
+        this.enabled = true;
     }
 }
 

@@ -51,7 +51,7 @@ public class KeyPokeTracker : MonoBehaviour
         }
 
         // Update the displayed text
-        text.text = string.Join("\n", keyPokeOrder);
+        //text.text = string.Join("\n", keyPokeOrder);
 
         Debug.Log($"Key {keyName} was poked for {pokeDuration} seconds, starting at {pokeStartTime}");
     }
