@@ -170,6 +170,14 @@ public class PlayerSound : MonoBehaviour
                 combinedQueue = new Queue<Notes>(CombineHands());
                 songTimer = 0f;
                 PlayNextNotes();
+                twinkleManager.report.gameObject.SetActive(false);
+                if(currentSong.SongName == "Twinkle Twinkle Little Star"){
+                    twinkleManager.ActivateImage1(); 
+                    twinkleManager.enabled = true; 
+                    twinkleManager.durationTime = 0f;
+                    twinkleManager.errorKeys = 0;
+                }
+                
             }
             else
             {
@@ -180,7 +188,9 @@ public class PlayerSound : MonoBehaviour
             {
 
                 twinkleManager.ActivateImage1(); 
-                twinkleManager.enabled = true;  
+                twinkleManager.enabled = true; 
+                twinkleManager.durationTime = 0f; 
+                twinkleManager.errorKeys = 0;
             }if (currentSong.SongName == "Twinkle Twinkle Little Star" && !LockNote.isOn && !DropNotes.isOn){
                 isPlaying = true;
                 combinedQueue = new Queue<Notes>(CombineHands());
@@ -188,6 +198,8 @@ public class PlayerSound : MonoBehaviour
                 PlayNextNotes();
                 twinkleManager.ActivateImage1(); 
                 twinkleManager.enabled = true; 
+                twinkleManager.durationTime = 0f;
+                twinkleManager.errorKeys = 0;
             }
         }
 
@@ -215,9 +227,14 @@ public class PlayerSound : MonoBehaviour
                    
                 }
                 else
-                {
-                    PlayNoteAndHighlight(currentNote);
+                {   
+                    if(DropNotes.isOn){
+                        PlayNoteAndHighlight(currentNote);
+                    }else{
+                        HighlightKeyOnly(currentNote);
+                    }
                 }
+                    
                 PlayNextNotes();
             }
 
@@ -273,14 +290,30 @@ public class PlayerSound : MonoBehaviour
 
     void HighlightKeyOnly(Notes note)
     {
-        string keyValue = note.getKeyValue();
+         string keyValue = note.getKeyValue();
 
         if (pianoKeys.ContainsKey(keyValue))
         {
             GameObject key = pianoKeys[keyValue];
+            AudioSource keyAudio = key.GetComponent<AudioSource>();
             MeshRenderer renderer = key.GetComponent<MeshRenderer>();
 
+            //keyAudio.Play();
+            Material defaultMaterial = renderer.material;
             renderer.material = highlightedMaterial;
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f){
+                twinkleManager.image1.gameObject.SetActive(false);
+                twinkleManager.image2.gameObject.SetActive(true);
+            }
+            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f){
+                twinkleManager.image2.gameObject.SetActive(false);
+                twinkleManager.image3.gameObject.SetActive(true);
+            }
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f){
+                twinkleManager.image3.gameObject.SetActive(false);
+                twinkleManager.DisplayReport();
+            }
+            StartCoroutine(RestoreMaterialAfterDelay(renderer, defaultMaterial, (note.getEndBeat() - note.getStartBeat()) * speedMultiplier));
         }
     }
 

@@ -12,8 +12,8 @@ public class TwinkleManager : MonoBehaviour
     public RawImage image2; 
     public RawImage image3; 
     public GameObject report;
-    private int errorKeys;
-    private float durationTime;
+    public int errorKeys;
+    public float durationTime;
     public TextMeshProUGUI SongName;
     public TextMeshProUGUI UsedTime;
     public TextMeshProUGUI AccuracyRate;
@@ -196,7 +196,7 @@ public class TwinkleManager : MonoBehaviour
         image1.gameObject.SetActive(true);
         image2.gameObject.SetActive(false);
         image3.gameObject.SetActive(false);
-        report.SetActive(false);
+        report.gameObject.SetActive(false);
         isFirstSequenceCompleted = false;
         isSecondSequenceCompleted = false;
         isThirdSequenceCompleted = false;
@@ -235,7 +235,7 @@ public void ChangeMaterial()
             if (!CheckSequenceList.Contains(ele))
             {
                 CheckSequenceList.Add(ele);
-                Testing.text = string.Join("\n", CheckSequenceList);
+                //Testing.text = string.Join("\n", CheckSequenceList);
             }
         }
         keyPokeTracker.ClearKeyPokeOrder(); // Clear the poke order to track the next note separately

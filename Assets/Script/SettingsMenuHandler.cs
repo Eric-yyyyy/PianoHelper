@@ -30,7 +30,7 @@ public class SettingsMenuHandler : MonoBehaviour
         {
             // Toggle each element except the Exit button
             if (child.gameObject != exitButton.gameObject && child.gameObject.name != "Collider" &&
-                child.gameObject.name != "PlaneSurface" && child.gameObject.name != "Finish" && child.gameObject.name != "SongItemTemplate")
+                child.gameObject.name != "PlaneSurface" && child.gameObject.name != "Finish" && child.gameObject.name != "SongItemTemplate" && child.gameObject.name != "Search")
             {
                 child.gameObject.SetActive(visible);
             }
