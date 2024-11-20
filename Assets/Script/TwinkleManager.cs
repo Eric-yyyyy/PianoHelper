@@ -185,8 +185,10 @@ public class TwinkleManager : MonoBehaviour
         report.SetActive(true);
         SongName.text = "Twinkle Twinkle Little Star";
         UsedTime.text = durationTime.ToString("F2") + " seconds";
-        errorKeys = (totalPokeOrder.Count >= 86)? totalPokeOrder.Count - 86 : 86 - totalPokeOrder.Count;
-        AccuracyRate.text = ((86 - errorKeys) / 86f * 100).ToString("F2") + "%";
+        errorKeys = (totalPokeOrder.Count >= 42)? totalPokeOrder.Count - 42 : 42 - totalPokeOrder.Count;
+        
+        AccuracyRate.text = ((42f - errorKeys) / 42f * 100).ToString("F2") + "%";
+        //AccuracyRate.text = totalPokeOrder.Count.ToString();
         this.enabled = false;
     }
 
