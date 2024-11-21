@@ -10,6 +10,7 @@ public class PlayerSound : MonoBehaviour
     public Button finishButton;
     public Toggle LockNote;
     public Toggle DropNotes;
+    public Toggle AutoScroll;
     public GameObject fixedPianoParent;
     public float speedMultiplier = 0.5f;
 
@@ -184,14 +185,14 @@ public class PlayerSound : MonoBehaviour
                 Debug.LogWarning("No song selected or playback is already active.");
             }
         }else{
-            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn)
+            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn)
             {
 
                 twinkleManager.ActivateImage1(); 
                 twinkleManager.enabled = true; 
                 twinkleManager.durationTime = 0f; 
                 twinkleManager.errorKeys = 0;
-            }if (currentSong.SongName == "Twinkle Twinkle Little Star" && !LockNote.isOn && !DropNotes.isOn){
+            }if (currentSong.SongName == "Twinkle Twinkle Little Star" && !LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn){
                 isPlaying = true;
                 combinedQueue = new Queue<Notes>(CombineHands());
                 songTimer = 0f;
@@ -230,7 +231,7 @@ public class PlayerSound : MonoBehaviour
                 {   
                     if(DropNotes.isOn){
                         PlayNoteAndHighlight(currentNote);
-                    }else{
+                    }else if(AutoScroll.isOn){
                         HighlightKeyOnly(currentNote);
                     }
                 }

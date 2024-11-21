@@ -40,7 +40,7 @@ public class VRARToggleController : MonoBehaviour
       
         toggleVR.isOn = true; 
         piano88.isOn = true;
-        MusicSheetDropping.isOn = true;
+        MusicSheetAutoScroll.isOn = true;
         passthroughLayer.enabled = false; 
         //plane.SetActive(true);
     }
