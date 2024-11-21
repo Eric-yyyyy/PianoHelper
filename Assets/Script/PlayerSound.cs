@@ -202,6 +202,15 @@ public class PlayerSound : MonoBehaviour
                 twinkleManager.durationTime = 0f;
                 twinkleManager.errorKeys = 0;
             }
+            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn && !AutoScroll.isOn)
+            {
+
+                twinkleManager.ActivateImage1(); 
+                twinkleManager.enabled = true; 
+                twinkleManager.durationTime = 0f; 
+                twinkleManager.errorKeys = 0;
+            }
+
         }
 
     }
@@ -220,10 +229,12 @@ public class PlayerSound : MonoBehaviour
                         if(string.Equals(currentSong.SongName,"Twinkle Twinkle Little Star")){
 
                         }
-                    }else{
+                    }else if(AutoScroll.isOn){
                         if(string.Equals(currentSong.SongName,"Twinkle Twinkle Little Star")){
 
                         }
+                    }else{
+                        
                     }
                    
                 }
@@ -233,6 +244,8 @@ public class PlayerSound : MonoBehaviour
                         PlayNoteAndHighlight(currentNote);
                     }else if(AutoScroll.isOn){
                         HighlightKeyOnly(currentNote);
+                    }else{
+
                     }
                 }
                     

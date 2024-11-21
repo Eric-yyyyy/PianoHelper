@@ -7,6 +7,8 @@ using TMPro;
 public class TwinkleManager : MonoBehaviour
 {
     public Toggle LockNote;
+    public Toggle AutoPlay;
+    public Toggle AutoScroll;
     public KeyPokeTracker keyPokeTracker;
     public RawImage image1; 
     public RawImage image2; 
@@ -116,7 +118,10 @@ public class TwinkleManager : MonoBehaviour
 
         pokeOrder = keyPokeTracker.GetKeyPokeOrder();
         if(LockNote.isOn){
-            ChangeMaterial();
+            
+                ChangeMaterial();
+            
+            
             if (!isFirstSequenceCompleted && CheckSequenceList.Count >= targetSequence1.Count &&
                 (CheckAndCalculateSequence(CheckSequenceList, targetSequence1) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence1)))
             {
@@ -189,12 +194,15 @@ public class TwinkleManager : MonoBehaviour
         
         AccuracyRate.text = ((42f - errorKeys) / 42f * 100).ToString("F2") + "%";
         //AccuracyRate.text = totalPokeOrder.Count.ToString();
+        
         this.enabled = false;
+        errorKeys = 0;
     }
 
     public void ActivateImage1()
     {
         keyPokeTracker.ClearKeyPokeOrder();
+        totalPokeOrder.Clear();
         image1.gameObject.SetActive(true);
         image2.gameObject.SetActive(false);
         image3.gameObject.SetActive(false);
@@ -209,7 +217,7 @@ public void ChangeMaterial()
 {
     
     if (currentHighlightIndex >= righthand.Count) return; // Stop if all notes are highlighted
-
+    
     GameObject key = pianoKeys[righthand[currentHighlightIndex]];
     MeshRenderer renderer = key.GetComponent<MeshRenderer>();
     GameObject key2 = pianoKeys[lefthand[currentHighlightIndex]];
@@ -218,8 +226,11 @@ public void ChangeMaterial()
     // Only highlight if the current key has been reset
     if (keyPokedAndReset)
     {
-        renderer.material = highlightedMaterial;
-        renderer2.material = highlightedMaterial;
+        if(AutoScroll.isOn){
+            renderer.material = highlightedMaterial;
+            renderer2.material = highlightedMaterial;
+        }
+        
         keyPokedAndReset = false; // Mark as highlighted
     }
 
@@ -227,9 +238,12 @@ public void ChangeMaterial()
     if (pokeOrder.Count > 0 && (string.Equals(pokeOrder[pokeOrder.Count - 1].keyName, righthand[currentHighlightIndex]) || string.Equals(pokeOrder[pokeOrder.Count -1 ].keyName, lefthand[currentHighlightIndex])))
     {
         this.enabled = false;
-        ResetMaterial(righthand[currentHighlightIndex]); 
+        if(AutoScroll.isOn){
+            ResetMaterial(righthand[currentHighlightIndex]); 
         
-        ResetMaterial(lefthand[currentHighlightIndex]);
+            ResetMaterial(lefthand[currentHighlightIndex]);
+        }
+        
         keyPokedAndReset = true; // Mark as ready for the next note
         currentHighlightIndex++; // Move to the next note
         foreach (var ele in pokeOrder)
