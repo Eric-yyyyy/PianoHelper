@@ -12,7 +12,8 @@ public class PlayerSound : MonoBehaviour
     public Toggle DropNotes;
     public Toggle AutoScroll;
     public GameObject fixedPianoParent;
-    public float speedMultiplier = 0.5f;
+    public float speedMultiplier = 0.0f
+    ;
 
     private ISong currentSong; 
     private bool isPlaying = false;
@@ -185,14 +186,14 @@ public class PlayerSound : MonoBehaviour
                 Debug.LogWarning("No song selected or playback is already active.");
             }
         }else{
-            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn)
+            if (LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn)
             {
 
                 twinkleManager.ActivateImage1(); 
                 twinkleManager.enabled = true; 
                 twinkleManager.durationTime = 0f; 
                 twinkleManager.errorKeys = 0;
-            }if (currentSong.SongName == "Twinkle Twinkle Little Star" && !LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn){
+            }if (!LockNote.isOn && !DropNotes.isOn && AutoScroll.isOn){
                 isPlaying = true;
                 combinedQueue = new Queue<Notes>(CombineHands());
                 songTimer = 0f;
@@ -202,7 +203,7 @@ public class PlayerSound : MonoBehaviour
                 twinkleManager.durationTime = 0f;
                 twinkleManager.errorKeys = 0;
             }
-            if (currentSong.SongName == "Twinkle Twinkle Little Star" && LockNote.isOn && !DropNotes.isOn && !AutoScroll.isOn)
+            if (LockNote.isOn && !DropNotes.isOn && !AutoScroll.isOn)
             {
 
                 twinkleManager.ActivateImage1(); 
@@ -240,9 +241,9 @@ public class PlayerSound : MonoBehaviour
                 }
                 else
                 {   
-                    if(DropNotes.isOn){
+                    if(DropNotes.isOn ){
                         PlayNoteAndHighlight(currentNote);
-                    }else if(AutoScroll.isOn){
+                    }else if(AutoScroll.isOn ){
                         HighlightKeyOnly(currentNote);
                     }else{
 
@@ -256,7 +257,7 @@ public class PlayerSound : MonoBehaviour
 
         if (LockNote.isOn)
         {
-            CheckPokeDurations();
+            //CheckPokeDurations();
         }
     }
 
@@ -286,15 +287,15 @@ public class PlayerSound : MonoBehaviour
             keyAudio.Play();
             Material defaultMaterial = renderer.material;
             renderer.material = highlightedMaterial;
-            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f){
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image1.gameObject.SetActive(false);
                 twinkleManager.image2.gameObject.SetActive(true);
             }
-            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f){
+            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image2.gameObject.SetActive(false);
                 twinkleManager.image3.gameObject.SetActive(true);
             }
-            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f){
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image3.gameObject.SetActive(false);
                 twinkleManager.DisplayReport();
             }
@@ -315,15 +316,15 @@ public class PlayerSound : MonoBehaviour
             //keyAudio.Play();
             Material defaultMaterial = renderer.material;
             renderer.material = highlightedMaterial;
-            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f){
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 57.0f && note.getEndBeat() == 64.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image1.gameObject.SetActive(false);
                 twinkleManager.image2.gameObject.SetActive(true);
             }
-            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f){
+            if(string.Equals(keyValue,"D3") && note.getStartBeat() == 121.0f && note.getEndBeat() == 128.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image2.gameObject.SetActive(false);
                 twinkleManager.image3.gameObject.SetActive(true);
             }
-            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f){
+            if(string.Equals(keyValue,"C3") && note.getStartBeat() == 185.0f && note.getEndBeat() == 192.0f && currentSong.SongName == "Twinkle Twinkle Little Star"){
                 twinkleManager.image3.gameObject.SetActive(false);
                 twinkleManager.DisplayReport();
             }

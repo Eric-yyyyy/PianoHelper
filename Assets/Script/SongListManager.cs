@@ -20,8 +20,9 @@ public class SongListManager : MonoBehaviour
     void PopulateSongList()
     {
         CreateSongButton("Twinkle Twinkle Little Star", new Twinckle());
-        CreateSongButton("Laputua: Castle In The Sky", new CastleCity());
         CreateSongButton("Happy Birthday", new HappyBirthday());
+        CreateSongButton("Laputua: Castle In The Sky", new CastleCity());
+        
     }
 
     void CreateSongButton(string songName, ISong songInstance)

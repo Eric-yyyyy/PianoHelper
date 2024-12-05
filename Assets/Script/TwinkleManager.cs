@@ -30,14 +30,15 @@ public class TwinkleManager : MonoBehaviour
     private readonly List<string> targetSequence1 = new List<string> { "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
     private readonly List<string> targetleftSequence1 = new List<string> {"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2", "B2", "B2", "C2" };
     private readonly List<string> targetSequence2 = new List<string> { "G3", "G3", "F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3"};
-    private readonly List<string> targetleftSequence2 = new List<string> { "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "A2"}; 
+    private readonly List<string> targetleftSequence2 = new List<string> { "E2", "E2", "D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", "C2", "G2"}; 
     private readonly List<string> targetSequence3 = new List<string>{ "C3","C3","G3","G3","A4","A4","G3","F3", "F3", "E3", "E3", "D3", "D3", "C3" };
-    private readonly List<string> targetleftSequence3 = new List<string>{"E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+    private readonly List<string> targetleftSequence3 = new List<string>{"E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","G1","C2" };
+    public int compareIndex = 0;
 
     public List<string> righthand = new List<string>{"C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3","G3", "G3","F3", "F3", "E3", "E3", "D3", "G3", "G3", "F3", "F3", "E3", "E3", "D3", "C3","C3","G3","G3","A4","A4","G3","F3","F3","E3","E3", "D3", "D3", "C3" };
     private readonly List<string>  lefthand = new List<string>{"E2","E2","E2","E2","F2","F2","E2","D2","D2","C2","C2",
      "B2", "B2", "C2", "E2", "E2","D2", "D2", "C2", "C2", "B2", "E2", "E2", "D2", "D2", "C2", 
-     "C2", "A2", "E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","A2","C2" };
+     "C2", "G1", "E2","E2","E2","E2","F2","A3","C3","D2","A3", "G2", "C2", "G2","G1","C2" };
     private readonly List<List<string>> combinedHand = new List<List<string>> {
     new List<string> { "C3", "E2" },
     new List<string> { "C3", "E2" },
@@ -122,8 +123,8 @@ public class TwinkleManager : MonoBehaviour
                 ChangeMaterial();
             
             
-            if (!isFirstSequenceCompleted && CheckSequenceList.Count >= targetSequence1.Count &&
-                (CheckAndCalculateSequence(CheckSequenceList, targetSequence1) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence1)))
+            if (!isFirstSequenceCompleted && ((CheckSequenceList.Count >= targetSequence1.Count &&
+                (CheckAndCalculateSequence(CheckSequenceList, targetSequence1) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence1))) || currentHighlightIndex >= 14))
             {
                 image1.gameObject.SetActive(false);
                 image2.gameObject.SetActive(true);
@@ -131,8 +132,8 @@ public class TwinkleManager : MonoBehaviour
                 //ChangeMaterial();
                 CheckSequenceList.Clear();
             }
-            else if (isFirstSequenceCompleted && !isSecondSequenceCompleted && CheckSequenceList.Count >= targetSequence2.Count &&
-                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence2) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence2)))
+            else if (isFirstSequenceCompleted && (!isSecondSequenceCompleted && CheckSequenceList.Count >= targetSequence2.Count &&
+                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence2) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence2))) )
             {
                 image2.gameObject.SetActive(false);
                 image3.gameObject.SetActive(true);
@@ -140,8 +141,8 @@ public class TwinkleManager : MonoBehaviour
                 //ChangeMaterial();
                 CheckSequenceList.Clear();
             }
-            else if (isSecondSequenceCompleted && !isThirdSequenceCompleted && CheckSequenceList.Count >= targetSequence3.Count &&
-                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence3) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence3)))
+            else if (isSecondSequenceCompleted && (((!isThirdSequenceCompleted && CheckSequenceList.Count >= targetSequence3.Count &&
+                    (CheckAndCalculateSequence(CheckSequenceList, targetSequence3) || CheckAndCalculateSequence(CheckSequenceList, targetleftSequence3))) )))
             {
                 image3.gameObject.SetActive(false);
                 isThirdSequenceCompleted = true;
@@ -190,9 +191,9 @@ public class TwinkleManager : MonoBehaviour
         report.SetActive(true);
         SongName.text = "Twinkle Twinkle Little Star";
         UsedTime.text = durationTime.ToString("F2") + " seconds";
-        errorKeys = (totalPokeOrder.Count >= 42)? totalPokeOrder.Count - 42 : 42 - totalPokeOrder.Count;
+        errorKeys = (totalPokeOrder.Count >= 84)? totalPokeOrder.Count - 84 : 84 - totalPokeOrder.Count;
         
-        AccuracyRate.text = ((42f - errorKeys) / 42f * 100).ToString("F2") + "%";
+        AccuracyRate.text = ((84f - errorKeys) / 84f * 100).ToString("F2") + "%";
         //AccuracyRate.text = totalPokeOrder.Count.ToString();
         
         this.enabled = false;
@@ -211,10 +212,14 @@ public class TwinkleManager : MonoBehaviour
         isSecondSequenceCompleted = false;
         isThirdSequenceCompleted = false;
         currentHighlightIndex = 0;
+        compareIndex = 0;
     }
 public void ChangeMaterial()
 
 {
+    // if(currentHighlightIndex != compareIndex){
+    //     currentHighlightIndex = compareIndex;
+    // }
     
     if (currentHighlightIndex >= righthand.Count) return; // Stop if all notes are highlighted
     
@@ -224,18 +229,23 @@ public void ChangeMaterial()
     MeshRenderer renderer2 = key2.GetComponent<MeshRenderer>();
 
     // Only highlight if the current key has been reset
-    if (keyPokedAndReset)
-    {
-        if(AutoScroll.isOn){
-            renderer.material = highlightedMaterial;
-            renderer2.material = highlightedMaterial;
-        }
+    // if (keyPokedAndReset)
+    // {
+    //     if(AutoScroll.isOn){
+    //         renderer.material = highlightedMaterial;
+    //         renderer2.material = highlightedMaterial;
+    //     }
         
-        keyPokedAndReset = false; // Mark as highlighted
+    //     keyPokedAndReset = false; // Mark as highlighted
+    // }
+
+    if(AutoScroll.isOn){
+        renderer.material = highlightedMaterial;
+        renderer2.material = highlightedMaterial;
     }
 
     // Check if the current key has been poked
-    if (pokeOrder.Count > 0 && (string.Equals(pokeOrder[pokeOrder.Count - 1].keyName, righthand[currentHighlightIndex]) || string.Equals(pokeOrder[pokeOrder.Count -1 ].keyName, lefthand[currentHighlightIndex])))
+    if (pokeOrder.Count > 0 && (string.Equals(pokeOrder[pokeOrder.Count - 1].keyName, righthand[currentHighlightIndex]) || (pokeOrder.Count > 1 && string.Equals(pokeOrder[pokeOrder.Count - 2].keyName, righthand[currentHighlightIndex]))))
     {
         this.enabled = false;
         if(AutoScroll.isOn){
@@ -246,6 +256,7 @@ public void ChangeMaterial()
         
         keyPokedAndReset = true; // Mark as ready for the next note
         currentHighlightIndex++; // Move to the next note
+        //compareIndex = currentHighlightIndex;
         foreach (var ele in pokeOrder)
         {
             if (!CheckSequenceList.Contains(ele))
